@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Courgette&family=Numans&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="icon"
+      href="assets/icons8-calculadora-16.png"
+      type="image/x-icon"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="stylesfoot.css" />
+    <title>Calculadora Inteligente</title>
+  </head>
+  <body>
+    <div class="container">
+      <input
+        id="screen"
+        type="text"
+        placeholder="0"
+        oninput="validarNumero()"
+      />
+
+      <div class="btns">
+        <div class="row">
+          <button id="ac" onclick="screen.value=''">AC</button>
+          <button id="ce" onclick="backspc()">CE</button>
+          <button class="btn">%</button>
+          <button onclick="sqrt()" class="btn">√</button>
+          <button class="btn">(</button>
+          <button class="btn">)</button>
+        </div>
+        <div class="row">
+          <button onclick="sin()" class="btn">sin</button>
+          <button onclick="pi()" class="btn">π</button>
+          <button onclick="e()" class="btn">e</button>
+          <button onclick="pow()" class="btn">x<sup>y</sup></button>
+          <button class="btn">×</button>
+          <button onclick="fact()" class="btn">x!</button>
+        </div>
+        <div class="row">
+          <button onclick="cos()" class="btn">cos</button>
+          <button onclick="log()" class="btn">log</button>
+          <button onclick="tan()" class="btn">tan</button>
+          <button class="btn">+</button>
+          <button class="btn"><b>-</b></button>
+          <button class="btn"><b>÷</b></button>
+        </div>
+        <div class="row">
+          <button class="btn">1</button>
+          <button class="btn">2</button>
+          <button class="btn">3</button>
+          <button class="btn">4</button>
+          <button class="btn">5</button>
+          <button class="btn">6</button>
+        </div>
+        <div class="row">
+          <button class="btn">7</button>
+          <button class="btn">8</button>
+          <button class="btn">9</button>
+          <button class="btn"><b>.</b></button>
+          <button class="btn">0</button>
+          <button id="eval" onclick="screen.value=eval(screen.value)">=</button>
+        </div>
+      </div>
+    </div>
+    <br />
+    <footer>
+      <small>
+        Sitio diseñado por
+        <a
+          href="https://angelesteban-afk.github.io/"
+          target="_blank"
+          rel="noopener"
+          >AngelEsteban-afk</a
+        >
+      </small>
+    </footer>
+    <script>
+      var screen = document.querySelector("#screen");
+      var btn = document.querySelectorAll(".btn");
+
+      for (item of btn) {
+        item.addEventListener("click", (e) => {
+          btntext = e.target.innerText;
+          if (btntext == "×") {
+            btntext = "*";
+          }
+
+          if (btntext == "÷") {
+            btntext = "/";
+          }
+
+          screen.value += btntext;
+        });
+      }
+
+      function sin() {
+        screen.value = Math.sin(screen.value);
+      }
+      function cos() {
+        screen.value = Math.cos(screen.value);
+      }
+      function tan() {
+        screen.value = Math.tan(screen.value);
+      }
+      function pow() {
+        screen.value = Math.pow(screen.value, 2);
+      }
+      function sqrt() {
+        screen.value = Math.sqrt(screen.value, 2);
+      }
+      function log() {
+        screen.value = Math.log(screen.value);
+      }
+      function pi() {
+        screen.value = 3.14159265359;
+      }
+      function e() {
+        screen.value = 2.71828182846;
+      }
+      function fact() {
+        var i, num, f;
+        f = 1;
+        num = screen.value;
+        for (i = 1; i <= num; i++) {
+          f = f * i;
+        }
+
+        i = i - 1;
+
+        screen.value = f;
+      }
+
+      function backspc() {
+        screen.value = screen.value.substr(0, screen.value.length - 1);
+      }
+
+      function validarNumero() {
+        let valor = screen.value;
+        // Verificamos si el valor contiene algún carácter que no sea un número
+        if (isNaN(valor)) {
+          screen.value = ""; // Limpiamos el campo
+          screen.value = "NaN"; // Mensaje de error en el placeholder
+        } else {
+          screen.placeholder = "0";
+        }
+      }
+    </script>
+  </body>
+</html>
